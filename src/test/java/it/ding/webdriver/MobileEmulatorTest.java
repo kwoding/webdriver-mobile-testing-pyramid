@@ -2,7 +2,7 @@ package it.ding.webdriver;
 
 import static it.ding.webdriver.DriverFactory.getDriver;
 import static it.ding.webdriver.DriverFactory.setDriver;
-import static it.ding.webdriver.Platform.SAMSUNG_GALAXY_S9_EMULATOR_CLOUD;
+import static it.ding.webdriver.Platform.GALAXYS9_EMULATOR_CLOUD;
 import static it.ding.webdriver.util.BrowserUtil.getCurrentUrl;
 import static it.ding.webdriver.util.BrowserUtil.takeScreenshot;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,7 +25,7 @@ public class MobileEmulatorTest {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException {
-        setDriver(SAMSUNG_GALAXY_S9_EMULATOR_CLOUD);
+        setDriver(GALAXYS9_EMULATOR_CLOUD);
         driver = ((AndroidDriver) getDriver());
     }
 
@@ -54,5 +54,4 @@ public class MobileEmulatorTest {
         takeScreenshot("gsm-no-call");
         assertThat(getCurrentUrl(), containsString("saucecon.com"));
     }
-
 }

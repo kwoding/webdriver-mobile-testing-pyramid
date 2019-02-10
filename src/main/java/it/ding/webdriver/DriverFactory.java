@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -18,18 +19,17 @@ public class DriverFactory {
     private static RemoteWebDriver driver;
     private static final String SAUCE_USERNAME = globalProperties.getString("sauce.username");
     private static final String SAUCE_KEY = globalProperties.getString("sauce.key");
+    private static final String TEST_OBJECT_API_KEY = "testobjectApiKey";
+    private static final String TEST_OBJECT_WEB_KEY_VALUE = globalProperties.getString("testobject.web.key");
+    private static final String TEST_OBJECT_IOS_KEY_VALUE = globalProperties.getString("testobject.ios.key");
+    private static final String TEST_OBJECT_ANDROID_KEY_VALUE = globalProperties.getString("testobject.android.key");
     private static final String CLOUD_HUB_URL = String.format(
         "https://%s:%s@ondemand.saucelabs.com:443/wd/hub",
         SAUCE_USERNAME, SAUCE_KEY);
-    private static final String MOBILE_SERVER_URL = "http://0.0.0.0:4723/wd/hub";
-    private static final String AUTOMATION_NAME = "automationName";
-    private static final String DEVICE_NAME = "deviceName";
-    private static final String PLATFORM_NAME = "platformName";
-    private static final String BROWSER_NAME = "browserName";
-    private static final String PLATFORM_VERSION = "platformVersion";
-    private static final String START_IWDP = "startIWDP";
-    private static final String NATIVE_WEB_SCREENSHOT = "nativeWebScreenshot";
-    private static final String NEW_COMMAND_TIMEOUT = "newCommandTimeout";
+    private static final String RDC_HUB_URL = "https://eu1.appium.testobject.com/wd/hub";
+    private static final String LOCAL_APPIUM_SERVER_URL = "http://0.0.0.0:4723/wd/hub";
+    private static final String ANDROID = "Android";
+    private static final String IOS = "iOS";
 
     private DriverFactory() {
     }
@@ -43,35 +43,32 @@ public class DriverFactory {
                 driver = new RemoteWebDriver(new URL(CLOUD_HUB_URL), chromeOptions);
                 break;
             case FIREFOX_DESKTOP_CLOUD:
-                capabilities.setBrowserName("firefox");
-                driver = new RemoteWebDriver(new URL(CLOUD_HUB_URL), capabilities);
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                driver = new RemoteWebDriver(new URL(CLOUD_HUB_URL), firefoxOptions);
                 break;
-            case SAMSUNG_GALAXY_S9_EMULATOR_CLOUD:
-                capabilities.setCapability(AUTOMATION_NAME, "uiautomator2");
-                capabilities.setCapability(DEVICE_NAME, "Samsung Galaxy S9 HD GoogleAPI Emulator");
-                capabilities.setCapability(PLATFORM_NAME, "Android");
-                capabilities.setCapability(PLATFORM_VERSION, "8.0");
-                capabilities.setCapability(BROWSER_NAME, "chrome");
-                capabilities.setCapability(NATIVE_WEB_SCREENSHOT, true);
+            case GALAXYS9_EMULATOR_CLOUD:
+                setDeviceCapabilities(capabilities, "Samsung Galaxy S9 HD GoogleAPI Emulator", ANDROID, "8.0");
                 driver = new AndroidDriver(new URL(CLOUD_HUB_URL), capabilities);
                 break;
+            case NEXUS5X_RDC:
+                capabilities.setCapability(TEST_OBJECT_API_KEY, TEST_OBJECT_WEB_KEY_VALUE);
+                setDeviceCapabilities(capabilities, "LG Nexus 5X Free", ANDROID, "8.1");
+                driver = new AndroidDriver(new URL(RDC_HUB_URL), capabilities);
+                break;
+            case IPHONE6_RDC:
+                capabilities.setCapability(TEST_OBJECT_API_KEY, TEST_OBJECT_IOS_KEY_VALUE);
+                capabilities.setCapability("recordDeviceVitals", true);
+                setDeviceCapabilities(capabilities, "iPhone 6", IOS, "12.1");
+                driver = new IOSDriver<>(new URL(RDC_HUB_URL), capabilities);
+                break;
             case PIXEL2_EMULATOR_LOCAL:
-                capabilities.setCapability(AUTOMATION_NAME, "uiautomator2");
-                capabilities.setCapability(DEVICE_NAME, "Pixel 2");
-                capabilities.setCapability(PLATFORM_NAME, "Android");
-                capabilities.setCapability(BROWSER_NAME, "chrome");
-                capabilities.setCapability(NATIVE_WEB_SCREENSHOT, true);
-                capabilities.setCapability(NEW_COMMAND_TIMEOUT, 90);
-                driver = new AndroidDriver(new URL(MOBILE_SERVER_URL), capabilities);
+                setDeviceCapabilities(capabilities, "Pixel 2", ANDROID, "8.0");
+                driver = new AndroidDriver(new URL(LOCAL_APPIUM_SERVER_URL), capabilities);
                 break;
             case IPHONEX_SIMULATOR_LOCAL:
-                capabilities.setCapability(AUTOMATION_NAME, "XCUITest");
-                capabilities.setCapability(DEVICE_NAME, "iPhone X");
-                capabilities.setCapability(PLATFORM_NAME, "iOS");
-                capabilities.setCapability(PLATFORM_VERSION, "12.1");
-                capabilities.setCapability(BROWSER_NAME, "safari");
-                capabilities.setCapability(START_IWDP, true);
-                driver = new IOSDriver(new URL(MOBILE_SERVER_URL), capabilities);
+                setDeviceCapabilities(capabilities, "iPhone X", IOS, "12.1");
+                capabilities.setCapability("startIWDP", true);
+                driver = new IOSDriver(new URL(LOCAL_APPIUM_SERVER_URL), capabilities);
                 break;
             case CHROME_DESKTOP_LOCAL:
             default:
@@ -86,5 +83,16 @@ public class DriverFactory {
 
     public static RemoteWebDriver getDriver() {
         return driver;
+    }
+
+    private static void setDeviceCapabilities(DesiredCapabilities capabilities, String deviceName,
+        String platformName, String platformVersion) {
+        capabilities.setCapability("automationName", "iOS".equalsIgnoreCase(platformName) ? "XCUITest" : "uiautomator2");
+        capabilities.setCapability("deviceName", deviceName);
+        capabilities.setCapability("platformName", platformName);
+        capabilities.setCapability("platformVersion", platformVersion);
+        capabilities.setCapability("browserName", "iOS".equalsIgnoreCase(platformName) ? "safari" : "chrome");
+        capabilities.setCapability("nativeWebScreenshot", true);
+        capabilities.setCapability("newCommandTimeout", 90);
     }
 }

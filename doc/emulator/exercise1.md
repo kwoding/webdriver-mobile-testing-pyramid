@@ -1,4 +1,4 @@
-# Exercise 2 Mobile emulators: Text messaging
+# Exercise 1 Mobile emulators: Text messaging
 
 ## Description
 1. Visit https://saucecon.com
