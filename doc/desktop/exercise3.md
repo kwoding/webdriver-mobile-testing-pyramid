@@ -1,4 +1,4 @@
-# Exercise 2 Desktop browsers: Mobile user agent
+# Exercise 3 Desktop browsers: Element positions
 
 ## Description
 1. Visit https://saucecon.com on desktop viewport

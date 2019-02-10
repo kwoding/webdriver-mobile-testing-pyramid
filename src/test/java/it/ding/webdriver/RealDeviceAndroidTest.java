@@ -2,7 +2,7 @@ package it.ding.webdriver;
 
 import static it.ding.webdriver.DriverFactory.getDriver;
 import static it.ding.webdriver.DriverFactory.setDriver;
-import static it.ding.webdriver.Platform.PIXEL2_EMULATOR_LOCAL;
+import static it.ding.webdriver.Platform.NEXUS5X_RDC;
 import static it.ding.webdriver.util.BrowserUtil.takeScreenshot;
 
 import io.appium.java_client.android.AndroidDriver;
@@ -17,7 +17,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class RealDeviceTest {
+public class RealDeviceAndroidTest {
 
     private static AndroidDriver driver;
 
@@ -27,7 +27,7 @@ public class RealDeviceTest {
 
     @BeforeClass
     public static void setUp() throws MalformedURLException {
-        setDriver(PIXEL2_EMULATOR_LOCAL);
+        setDriver(NEXUS5X_RDC);
         driver = ((AndroidDriver) getDriver());
     }
 
@@ -47,14 +47,14 @@ public class RealDeviceTest {
         baseMarkPage.visit();
         baseMarkPage.runDemo();
 
-        System.out.println("memoryinfo = " + getDeviceInfo(driver, "memoryinfo"));
-        System.out.println("batteryinfo = " + getDeviceInfo(driver, "batteryinfo"));
-        System.out.println("networkinfo = " + getDeviceInfo(driver, "networkinfo"));
-        Thread.sleep(60000);
+        System.out.println("memoryinfo: " + getDeviceInfo(driver, "memoryinfo"));
+        System.out.println("batteryinfo: " + getDeviceInfo(driver, "batteryinfo"));
+        System.out.println("networkinfo: " + getDeviceInfo(driver, "networkinfo"));
+        Thread.sleep(10000);
 
-        System.out.println("memoryinfo = " + getDeviceInfo(driver, "memoryinfo"));
-        System.out.println("memoryinfo = " + getDeviceInfo(driver, "memoryinfo"));
-        System.out.println("networkinfo = " + getDeviceInfo(driver, "networkinfo"));
+        System.out.println("memoryinfo: " + getDeviceInfo(driver, "memoryinfo"));
+        System.out.println("batteryinfo: " + getDeviceInfo(driver, "batteryinfo"));
+        System.out.println("networkinfo: " + getDeviceInfo(driver, "networkinfo"));
     }
 
     private Map<String, Integer> getDeviceInfo(AndroidDriver driver, String dataType) {
@@ -71,5 +71,4 @@ public class RealDeviceTest {
         }
         return readableData;
     }
-
 }

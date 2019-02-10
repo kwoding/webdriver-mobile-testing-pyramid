@@ -1,4 +1,4 @@
-# Exercise 2 Desktop browsers: Mobile user agent
+# Exercise 1 Desktop browsers: Mobile user agent
 
 ## Description
 1. Set mobile user agent

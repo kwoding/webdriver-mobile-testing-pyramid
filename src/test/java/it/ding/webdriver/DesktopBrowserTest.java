@@ -57,8 +57,8 @@ public class DesktopBrowserTest {
     }
 
     @Test
+    // Add argument "--user-agent" when instantiating the browser
     public void canInjectUserAgent() {
-        // Add argument "--user-agent" when instantiating the browser
         bookingComPage.visit();
         resizeBrowser(360, 740);
         assertThat(bookingComPage.isBookingAppDisplayed(), is(true));
@@ -66,7 +66,7 @@ public class DesktopBrowserTest {
 
     @Test
     public void canSetGeoLocation() throws InterruptedException, IOException {
-        ((LocationContext)driver).setLocation(new Location(3.1466, 101.6958, 100));
+        ((LocationContext) driver).setLocation(new Location(3.1466, 101.6958, 100));
         driver.get("http://maps.google.com");
         Thread.sleep(3000);
         takeScreenshot("gps");
@@ -98,5 +98,4 @@ public class DesktopBrowserTest {
         resizeBrowser(360, 740);
         takeScreenshot("saucecon-browser");
     }
-
 }
