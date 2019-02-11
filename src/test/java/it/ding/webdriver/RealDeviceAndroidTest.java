@@ -50,7 +50,7 @@ public class RealDeviceAndroidTest {
         System.out.println("memoryinfo: " + getDeviceInfo(driver, "memoryinfo"));
         System.out.println("batteryinfo: " + getDeviceInfo(driver, "batteryinfo"));
         System.out.println("networkinfo: " + getDeviceInfo(driver, "networkinfo"));
-        Thread.sleep(10000);
+        Thread.sleep(30000);
 
         System.out.println("memoryinfo: " + getDeviceInfo(driver, "memoryinfo"));
         System.out.println("batteryinfo: " + getDeviceInfo(driver, "batteryinfo"));
