@@ -55,12 +55,6 @@ public class DriverFactory {
                 setDeviceCapabilities(capabilities, "LG Nexus 5X Free", ANDROID, "8.1");
                 driver = new AndroidDriver(new URL(RDC_HUB_URL), capabilities);
                 break;
-            case IPHONE6_RDC:
-                capabilities.setCapability(TEST_OBJECT_API_KEY, TEST_OBJECT_IOS_KEY_VALUE);
-                capabilities.setCapability("recordDeviceVitals", true);
-                setDeviceCapabilities(capabilities, "iPhone 6", IOS, "12.1");
-                driver = new IOSDriver<>(new URL(RDC_HUB_URL), capabilities);
-                break;
             case PIXEL2_EMULATOR_LOCAL:
                 setDeviceCapabilities(capabilities, "Pixel 2", ANDROID, "8.0");
                 driver = new AndroidDriver(new URL(LOCAL_APPIUM_SERVER_URL), capabilities);
