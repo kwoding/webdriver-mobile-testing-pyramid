@@ -7,20 +7,15 @@ import static it.ding.webdriver.util.BrowserUtil.resizeBrowser;
 import static it.ding.webdriver.util.BrowserUtil.takeScreenshot;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 import it.ding.webdriver.pageobject.BookingComPage;
-import it.ding.webdriver.pageobject.SauceConHomePage;
 import it.ding.webdriver.pageobject.TheInternetLoginPage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.html5.Location;
 import org.openqa.selenium.html5.LocationContext;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -30,8 +25,6 @@ public class DesktopBrowserTest {
     private static RemoteWebDriver driver;
 
     private TheInternetLoginPage theInternetLoginPage = new TheInternetLoginPage(driver);
-
-    private SauceConHomePage sauceConHomePage = new SauceConHomePage(driver);
 
     private BookingComPage bookingComPage = new BookingComPage(driver);
 
@@ -70,25 +63,5 @@ public class DesktopBrowserTest {
         driver.get("http://maps.google.com");
         Thread.sleep(3000);
         takeScreenshot("gps");
-    }
-
-    @Test
-    public void elementLocationShouldBeDisplayedDifferentlyOnMobileViewPort() {
-        sauceConHomePage.visit();
-
-        Point emailInputLocation = sauceConHomePage.getEmailInputLocation();
-        Dimension emailInputSize = sauceConHomePage.getEmailInputSize();
-        Point submitNewsLetterButtonLocation = sauceConHomePage.getSubmitNewsLetterButtonLocation();
-
-        assertThat(submitNewsLetterButtonLocation.getX(), greaterThan(emailInputLocation.getX() + emailInputSize.getWidth()));
-        assertThat(submitNewsLetterButtonLocation.getY(), lessThanOrEqualTo(emailInputLocation.getY() + emailInputSize.getHeight()));
-        resizeBrowser(360, 740);
-
-        Point emailInputMobileLocation = sauceConHomePage.getEmailInputLocation();
-        Dimension emailInputMobileSize = sauceConHomePage.getEmailInputSize();
-        Point submitNewsLetterButtonMobileLocation = sauceConHomePage.getSubmitNewsLetterButtonLocation();
-
-        assertThat(submitNewsLetterButtonMobileLocation.getX(), lessThanOrEqualTo(emailInputMobileLocation.getX() + emailInputMobileSize.getWidth()));
-        assertThat(submitNewsLetterButtonMobileLocation.getY(), greaterThan(emailInputMobileLocation.getY() + emailInputMobileSize.getHeight()));
     }
 }
