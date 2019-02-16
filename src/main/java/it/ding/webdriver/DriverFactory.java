@@ -50,11 +50,6 @@ public class DriverFactory {
                 setDeviceCapabilities(capabilities, "Samsung Galaxy S9 HD GoogleAPI Emulator", ANDROID, "8.0");
                 driver = new AndroidDriver(new URL(CLOUD_HUB_URL), capabilities);
                 break;
-            case NEXUS5X_RDC:
-                capabilities.setCapability(TEST_OBJECT_API_KEY, TEST_OBJECT_WEB_KEY_VALUE);
-                setDeviceCapabilities(capabilities, "LG Nexus 5X Free", ANDROID, "8.1");
-                driver = new AndroidDriver(new URL(RDC_HUB_URL), capabilities);
-                break;
             case PIXEL2_EMULATOR_LOCAL:
                 setDeviceCapabilities(capabilities, "Pixel 2", ANDROID, "8.0");
                 driver = new AndroidDriver(new URL(LOCAL_APPIUM_SERVER_URL), capabilities);
