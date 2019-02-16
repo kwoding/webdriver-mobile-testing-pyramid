@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 import io.appium.java_client.ios.IOSDriver;
-import it.ding.webdriver.pageobject.SauceConHomePage;
+import it.ding.webdriver.pageobject.DataIqHomePage;
 import it.ding.webdriver.pageobject.SwagLabsAppLoginPage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -21,7 +21,7 @@ public class RealDeviceIOSTest {
 
     private static IOSDriver driver;
 
-    private SauceConHomePage sauceConHomePage = new SauceConHomePage(driver);
+    private DataIqHomePage dataIqHomePage = new DataIqHomePage(driver);
 
     private SwagLabsAppLoginPage swagLabsAppLoginPage = new SwagLabsAppLoginPage(driver);
 
@@ -38,7 +38,7 @@ public class RealDeviceIOSTest {
 
     @Test
     public void canTakeScreenshotOfScreen() throws IOException {
-        sauceConHomePage.visit();
+        dataIqHomePage.visit();
         takeScreenshot("dataiq-real-ios-device");
     }
 
