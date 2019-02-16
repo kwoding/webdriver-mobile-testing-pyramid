@@ -59,8 +59,6 @@ public class DriverFactory {
             default:
                 ChromeOptions options = new ChromeOptions();
                 WebDriverManager.getInstance(DriverManagerType.CHROME).setup();
-                options.addArguments(
-                    "--user-agent=\"Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/603.1.23 (KHTML, like Gecko) Version/10.0 Mobile/14E5239e Safari/602.1\"");
                 driver = new ChromeDriver(options);
                 break;
         }
