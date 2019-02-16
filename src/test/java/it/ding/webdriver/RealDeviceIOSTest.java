@@ -39,7 +39,7 @@ public class RealDeviceIOSTest {
     @Test
     public void canTakeScreenshotOfScreen() throws IOException {
         sauceConHomePage.visit();
-        takeScreenshot("saucecon-real-device");
+        takeScreenshot("dataiq-real-ios-device");
     }
 
     @Test

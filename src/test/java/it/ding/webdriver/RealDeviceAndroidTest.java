@@ -7,7 +7,7 @@ import static it.ding.webdriver.util.BrowserUtil.takeScreenshot;
 
 import io.appium.java_client.android.AndroidDriver;
 import it.ding.webdriver.pageobject.BaseMarkPage;
-import it.ding.webdriver.pageobject.SauceConHomePage;
+import it.ding.webdriver.pageobject.DataIqHomePage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class RealDeviceAndroidTest {
 
     private static AndroidDriver driver;
 
-    private SauceConHomePage sauceConHomePage = new SauceConHomePage(driver);
+    private DataIqHomePage dataIqHomePage = new DataIqHomePage(driver);
 
     private BaseMarkPage baseMarkPage = new BaseMarkPage(driver);
 
@@ -38,8 +38,8 @@ public class RealDeviceAndroidTest {
 
     @Test
     public void canTakeScreenshotOfScreen() throws IOException {
-        sauceConHomePage.visit();
-        takeScreenshot("saucecon-real-device");
+        dataIqHomePage.visit();
+        takeScreenshot("dataiq-real-android-device");
     }
 
     @Test
