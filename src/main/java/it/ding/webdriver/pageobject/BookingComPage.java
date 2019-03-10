@@ -5,7 +5,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class BookingComPage extends BasePage {
 
-    private static final String GOOGLE_IMAGES = "http://www.booking.com";
+    private static final String BOOKING_COM = "http://www.booking.com";
     private static final By BOOKING_APP_ICON = By.cssSelector(".app-icon");
 
     public BookingComPage(RemoteWebDriver driver) {
@@ -13,7 +13,7 @@ public class BookingComPage extends BasePage {
     }
 
     public void visit() {
-        visit(GOOGLE_IMAGES);
+        visit(BOOKING_COM);
     }
 
     public boolean isBookingAppDisplayed() {
