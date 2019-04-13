@@ -12,7 +12,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 import it.ding.webdriver.pageobject.BookingComPage;
-import it.ding.webdriver.pageobject.DataIqHomePage;
 import it.ding.webdriver.pageobject.SauceConHomePage;
 import it.ding.webdriver.pageobject.TheInternetLoginPage;
 import java.io.IOException;
@@ -35,8 +34,6 @@ public class DesktopBrowserTest {
     private SauceConHomePage sauceConHomePage = new SauceConHomePage(driver);
 
     private BookingComPage bookingComPage = new BookingComPage(driver);
-
-    private DataIqHomePage dataIqHomePage = new DataIqHomePage(driver);
 
     @BeforeClass
     public static void setUp() throws MalformedURLException {
@@ -97,8 +94,8 @@ public class DesktopBrowserTest {
 
     @Test
     public void canTakeScreenshotOfScreen() throws IOException {
-        dataIqHomePage.visit();
+        sauceConHomePage.visit();
         resizeBrowser(360, 740);
-        takeScreenshot("dataiq-browser");
+        takeScreenshot("saucecon-browser");
     }
 }
