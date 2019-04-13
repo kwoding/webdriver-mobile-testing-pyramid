@@ -6,7 +6,7 @@ import static it.ding.webdriver.Platform.NEXUS5X_RDC;
 import static it.ding.webdriver.util.BrowserUtil.takeScreenshot;
 
 import io.appium.java_client.android.AndroidDriver;
-import it.ding.webdriver.pageobject.DataIqHomePage;
+import it.ding.webdriver.pageobject.SauceConHomePage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import org.junit.AfterClass;
@@ -17,7 +17,7 @@ public class RealDeviceAndroidTest {
 
     private static AndroidDriver driver;
 
-    private DataIqHomePage dataIqHomePage = new DataIqHomePage(driver);
+    private SauceConHomePage sauceConHomePage = new SauceConHomePage(driver);
 
     @BeforeClass
     public static void setUp() throws MalformedURLException {
@@ -32,7 +32,7 @@ public class RealDeviceAndroidTest {
 
     @Test
     public void canTakeScreenshotOfScreen() throws IOException {
-        dataIqHomePage.visit();
-        takeScreenshot("dataiq-real-android-device");
+        sauceConHomePage.visit();
+        takeScreenshot("saucecon-real-android-device");
     }
 }
