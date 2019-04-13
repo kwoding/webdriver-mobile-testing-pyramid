@@ -1,7 +1,7 @@
 # Exercise 3 Mobile emulators: Scaling
 
 ## Description
-1. Configure the `maven-surefire-plugin` to 3 processes in parallel (use `forkCount` property)
+1. Configure the `maven-surefire-plugin` to 3 processes in parallel (use `parallel` property)
 
 2. Extend the `DriverFactory` with 3 emulators with each a different Android version
 
