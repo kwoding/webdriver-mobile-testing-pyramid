@@ -3,7 +3,7 @@
 ## Description
 1. On desktop browser, resize to a mobile viewport that matches an available Android emulator’s viewport
 
-2. Visit https://dataiq.co.uk
+2. Visit https://saucecon.com
 
 3. Take screenshot
 
