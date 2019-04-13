@@ -68,8 +68,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.version}</version>
                 <configuration>
-                    <forkCount>3</forkCount>
-                    <reuseForks>false</reuseForks>
+                    <parallel>classes</parallel>
+                    <threadCount>3</threadCount>
                     <includes>**/Mobile*.class</includes>
                 </configuration>
             </plugin>
