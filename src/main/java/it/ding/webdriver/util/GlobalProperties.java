@@ -6,22 +6,6 @@ import org.apache.commons.configuration.EnvironmentConfiguration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 
-/**
- * This is the single thread-safe source of retrieving properties.
- *
- * Usage example:
- * <pre>
- * GlobalProperties globalProperties = GlobalProperties.getInstance();
- * String aUrl = globalProperties.getString("url");
- * </pre>
- *
- * note: GlobalProperties is a thread-safe singleton - it maintains a single instance within execution
- *
- * You can also use it as a property of a class;
- * <pre>
- *  private GlobalProperties globalProperties = GlobalProperties.getInstance();
- * </pre>
- */
 public class GlobalProperties {
 
     private static GlobalProperties instance;
@@ -38,7 +22,7 @@ public class GlobalProperties {
         }
     }
 
-    public synchronized static GlobalProperties getInstance() {
+    public static synchronized GlobalProperties getInstance() {
         if (instance == null) {
             instance = new GlobalProperties();
         }
@@ -59,10 +43,6 @@ public class GlobalProperties {
 
     public boolean getBoolean(String key) {
         return configuration.getBoolean(key);
-    }
-
-    public synchronized String syncGet(String key) {
-        return configuration.getString(key);
     }
 
     public <T> void setProperty(String key, T value) {
